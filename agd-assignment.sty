@@ -1,0 +1,43 @@
+\ProvidesPackage{agd-assignment}
+
+\usepackage[american]{babel}
+\usepackage[babel]{csquotes}
+
+\usepackage{hyperref}
+
+\usepackage[margin=1in,letterpaper]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage{kpfonts}
+
+\usepackage{microtype}
+
+% Define section styling
+\makechapterstyle{syllabus}{
+  \setsecheadstyle{\LARGE\scshape}
+  \setsubsecheadstyle{\Large\scshape\itshape}
+}
+\chapterstyle{syllabus}
+
+% Set up \theassign to access parameters of \assignment
+\newcommand{\theassign}[1]{\csname assign@#1\endcsname}
+
+\newcommand{\assigncourse}[1]{\gdef\assign@course{#1}}
+\newcommand{\assigninstructor}[1]{\gdef\assign@instructor{#1}}
+\newcommand{\assignterm}[1]{\gdef\assign@term{#1}}
+\newcommand{\assigncat}[1]{\gdef\assign@cat{#1}}
+\newcommand{\assigntitle}[1]{\gdef\assign@title{#1}}
+
+\setlength{\droptitle}{-5eX}
+\renewcommand*{\@maketitle}{
+  \newpage
+  \null
+  \vspace{\droptitle}
+  \begin{center}
+    \textbf{\Huge \theassign{cat}} \\
+    \textbf{\Huge \theassign{title}} \\[\baselineskip]
+    \textsc{\normalsize \theassign{course}} \\
+    \textsc{\normalsize \theassign{term}} \\
+    \textsc{\normalsize \theassign{instructor}}
+  \end{center}
+}
